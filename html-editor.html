@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+		 <link rel="stylesheet" type="text/css" href="css/menu.css">
+		 <link rel="stylesheet" type="text/css" href="css/localcss.css">
+		 <link rel="stylesheet" type="text/css" href="css/basecss.css">
+		 <style id="finalValuesCSS"></style>
+		 <link id="finalValuesJs"></link>
+		 <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+		<script async src="https://cdn.ampproject.org/v0.js"></script>
+		<script async custom-element="amp-selector" src="https://cdn.ampproject.org/v0/amp-selector-0.1.js"></script>
+		 <script async custom-element="amp-bind" src="https://cdn.ampproject.org/v0/amp-bind-0.1.js"></script>
+		 <script async custom-element="amp-form" src="https://cdn.ampproject.org/v0/amp-form-0.1.js"></script>
+
+        <title>HTML Editor</title>
+		<style>
+			[contentEditable=true]:empty:not(:focus):before{content:attr(data-placeholder) }
+			#finalValuesHtml{width: 100%;}
+		</style>
+		<style amp-custom>
+        :root {
+          --color-primary: #005AF0;
+          --space-1: .5rem;  /* 8px */
+          --space-4: 2rem;   /* 32px */
+        }
+        amp-selector[role=tablist].tabs-with-selector {
+            display: flex;
+        }
+        amp-selector[role=tablist].tabs-with-selector [role=tab][selected] {
+            outline: none;
+            border-bottom: 2px solid var(--color-primary);
+			background:blue;
+			color:#ffffff;
+			font-size:large;
+			font-weight:bold;
+        }
+        amp-selector[role=tablist].tabs-with-selector {
+            display: flex;
+        }
+        amp-selector[role=tablist].tabs-with-selector [role=tab] {
+          width: 100%;
+          text-align: center;
+          padding: var(--space-1);
+		  color:	blue;
+		 border-bottom: 2px solid var(--color-primary);
+		 font-size:large;
+		font-weight:bold;
+        }
+        amp-selector.tabpanels [role=tabpanel] {
+          display: none;
+        }
+        amp-selector.tabpanels [role=tabpanel][selected] {
+          outline: none;
+          display: block;
+        }
+		.mxh{max-height:90%;}
+    </style>
+    </head>
+    <body>
+<div class="container">
+	<div class="mxh">
+	<form>
+		<!--Form Section---------------------->
+      <amp-selector class="tabs-with-selector" role="tablist" on="select:myTabPanels.toggle(index=event.targetOption, value=true)">
+			<div id="sample3-tab1" role="tab" aria-controls="sample3-tabpanel1" option="0" selected>HTML</div>
+			<div id="sample3-tab2" role="tab" aria-controls="sample3-tabpanel2" option="1">CSS</div>
+			<div id="sample3-tab3" role="tab" aria-controls="sample3-tabpanel3" option="2">Output</div>
+		  </amp-selector>
+
+		  <amp-selector id="myTabPanels" class="tabpanels">
+		<!--Html Section---------------------->
+			<div id="sample3-tabpanel1" role="tabpanel" aria-labelledby="sample3-tab1" option selected>
+				<div class="span12 "><textarea  autoexpand  class="span12 pada1p mxh NewsCont mrgnr1p" placeholder="HTML Codes" name="name" id="htmlContents"></textarea></div>
+			</div>
+		<!--CSS/JS Section------------>
+			<div id="sample3-tabpanel2" role="tabpanel" aria-labelledby="sample3-tab2" option>
+				<div class="span12"><textarea autoexpand  class="span12 NewsCont mxh mrgn1p pada1p mrgnr1p" placeholder="CSS Class without style Element" name="name" id="cssContents"></textarea></div>
+			</div>
+		<!--Result Section---------------------------------->
+			<div id="sample3-tabpanel3" role="tabpanel" aria-labelledby="sample3-tab3" option>
+				<div class="span12 mxh NewsCont brdrthn"  id="finalValuesHtml" data-placeholder="Output" contenteditable="true"></div>
+			</div>
+      </amp-selector>
+	  		<div class="span12">			
+			<div class="span12"> <a class="lnkf sn" href="">  Clear </a>
+				<a rel="noopener" target="_blank" class="fntclrbl " title="MyJava Base CSS" href="https://myjava.in/html-Editor/css/basecss.css"><b> &rArr;BaseCss</b></a><a rel="noopener" target="_blank" class="fntclrbl" title="MyJava Menu CSS" href="https://myjava.in/html-Editor/css/menu.css"><b> &rArr;MenuCss </b></a>
+			</div>
+		</div>
+        </form>
+    </div> 
+	
+</div>
+
+	
+      
+<!--Script Section---------------------------------->			
+			
+			<script>
+                const htmlContents = document.getElementById('htmlContents');
+                const cssContents = document.getElementById('cssContents');
+                const JsContents = document.getElementById('jsContents');
+				const finalValues = document.getElementById('finalValues');
+
+				htmlContents.addEventListener('input', updateHtmlValue);
+				cssContents.addEventListener('input', updateCssValue);
+				jsContents.addEventListener('input', updateJsValue);
+
+				function updateHtmlValue(e) {
+				  finalValuesHtml.innerHTML = e.target.value;
+				}
+				function updateCssValue(e) {
+				  document.getElementById("finalValuesCSS").innerHTML = e.target.value;
+				}
+				function updateJsValue(e) {
+				  document.getElementById("finalValuesJs").href = e.target.value;
+				}
+            </script>
+    </body>
+</html>
